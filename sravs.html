@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <title>sara sthetics</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:15px 50px; border-bottom:1px solid #eee; }
+    header h1 { font-size:24px; letter-spacing:2px; color:#b8860b; }
+     .logo_img {
+      width: 70;
+      text-align: center;
+      background: #5f5d5d; /* Dark background for luxury feel */
+      padding: 15px 0;
+      border-radius: 2%
+    }
+    .logo_img img {
+      max-width: 190px;  /* adjust logo size */
+      height: auto;
+    }
+
+    nav a { margin:0 15px; text-decoration:none; color:#555; font-weight:500; }
+    nav a:hover { color:#b8860b; }
+    .container { padding:30px 50px; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
+    .product-card { text-align:center; border:1px solid #eee; border-radius:10px; overflow:hidden; padding:15px; background:#fff; cursor:pointer; transition:0.3s; }
+    .product-card img { width:100%; max-height:250px; object-fit:contain; border-radius:10px; transition:all 0.4s ease-in-out; }
+    .product-card:hover img { transform:scale(1.1); border:3px solid #ffd700; box-shadow:0px 4px 15px rgba(184,134,11,0.5); }
+    .product-card h3 { margin:15px 0 5px; font-size:18px; }
+    .product-card p { font-size:16px; font-weight:bold; color:#444; }
+
+    .filter-container { text-align:center; margin:20px; }
+    .filter-btn {
+      left:0; background:#b8860b; color:white; padding:10px 20px;
+      border:none; border-radius:6px; cursor:pointer; font-size:16px;
+    }
+    .filter-options {
+      display:none; margin-top:10px; background:#fff;
+      border:1px solid #ddd; border-radius:6px; padding:10px;
+      width:200px; margin-left:auto; margin-right:auto;
+      text-align:left; left:0%;
+    }
+    .filter-options button {
+      display:block; width:100%; padding:8px; border:none;
+      background:none; text-align:left; cursor:pointer;
+      font-size:15px; color:#333; left:0%;
+    }
+    .filter-options button:hover { background:#b8860b;; }
+
+    .social-icons a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border: 0.2rem solid #b8860b;
+    font-size: 1rem;
+    border-radius: 50%;
+    margin: 3rem 1.5rem 3rem;
+    transition: 0.3s ease;
+    gap: 3px;
+    color: #b8860b;
+    overflow: hidden;
+    left: 0%;
+}
+
+.social-icons a:hover{
+    color: black;
+    transform:scale(1.3) translateY(-5px);
+    background-color: #C0C0C0;
+    box-shadow: 0 0.25px #2d3dcb;
+    
+}
+.btn{
+     display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border: 0.2rem solid #b8860b;
+    font-size: 1rem;
+    border-radius: 60%;
+    margin: 3rem 1.5rem 3rem;
+    transition: 0.3s ease;
+    gap: 3px;
+    color: #b8860b;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn:hover{
+    color: black;
+    transform:scale(1.3) translateY(-5px);
+    background-color: #C0C0C0;
+    box-shadow: 0 0.25px #2d3dcb;
+
+}
+
+  </style>
+</head>
+<body>
+  <div class="logo_img">
+      <img src="logo.png" alt="sara asthetics">
+    </div>
+  <header>
+    
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Collections</a>
+      <a href="#about_us">about us</a>
+    </nav>
+  </header>
+
+
+   <!-- Filter Section -->
+  <div class="filter-top-row">
+      <button class="filter-btn" id="filterToggle">Filter </button>
+      <div class="active-filter" id="activeFilter">Showing: <strong>All</strong></div>
+    </div>
+    <div class="filter-options" id="filterOptions">
+      <button data-filter="low-high">Price: Low to High</button>
+      <button data-filter="high-low">Price: High to Low</button>
+      <button data-filter="gold">Gold</button>
+      <button data-filter="silver">Silver</button>
+      <button data-filter="fashion">Best in Fashion</button>
+      <button data-filter="all">Show All</button>
+    </div>
+
+  <section class="container" id="product-list"></section>
+  <!-- About Section -->
+<section id="about_us" class="active" style="padding:60px; background:#fdf7e3;">
+  <h2 style="color:#b8860b; font-size:28px; margin-bottom:15px;">About Us</h2>
+  <p style="max-width:700px; font-size:16px; color:#f3ef07; line-height:1.6;">
+    <h4 style= "color:#b8860b;"></h4>
+    <p> <h2>S Fashions</h2> <h4>Where Trend Meets Elegance. </h4> <br>
+    With its roots in India and a vision that embraces global trends, S Fashions is a celebration of style, confidence, and individuality. Every collection is inspired by the modern woman’s journey – her strength, elegance, and ever-evolving spirit. From timeless classics to contemporary statements, each design reflects the vibrancy of her personality and the stories she carries.
+
+At S Fashions, fashion is more than just clothing. it is a medium of self-expression. Every piece is crafted to blend comfort with sophistication, making it not only wearable but also deeply personal. Whether it’s the grace of traditional influences or the boldness of modern silhouettes, our creations are designed to empower women to embrace themselves fully.
+
+We believe that fashion is a talisman of self-celebration  a reminder of one’s unique charm and individuality. With every outfit, S Fashions aspires to revive confidence, inspire elegance, and redefine everyday wear into a statement of identity.  
+  </p>
+<div class="social-icons">
+                <a href="mailto:praneeth.nalamalapu@gmail.com"><i class="bi bi-envelope-at"></i></a>
+                <a href="https://www.instagram.com/saraa_sthetics?utm_source=qr&igsh=MXN0ZjY3dm1xdGt6Nw==" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a href="https://x.com/praneeth_n3802" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                <button class="btn"><i class="bi bi-telephone"></i> </button>
+            </div>
+            
+</section>
+
+            <script>
+                function copyAndDial(phoneNumber) {
+                    // for Cpying the phn no to the clipboard
+                    navigator.clipboard.writeText(phoneNumber).then(() => {
+                        console.log('Phone number copied:', phoneNumber);
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                    });
+                
+                    // to Open the dial pad with the phn no
+                    window.location.href = `tel:${phoneNumber}`;
+                }
+                
+                
+                document.querySelector(".btn").addEventListener("click", function() {
+                    copyAndDial("+91"); 
+                });
+                
+            </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("nav a").forEach(anchor => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute("href").substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 50, // Adjusts for any fixed header
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+        });
+</script>
+
+
+  
+
+  <script src="script.js"> </script>
+</body>
+</html>
+
+

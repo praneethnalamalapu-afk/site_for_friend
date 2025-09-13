@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Details | S Fashion</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#fafafa; padding:40px; }
+    h2 { color:#b8860b; margin-bottom:20px; }
+
+    form {
+      max-width:600px;
+      margin:auto;
+      background:#fff;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    label { display:block; margin:12px 0 6px; font-weight:bold; }
+    input, select, textarea {
+      width:100%;
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      font-size:15px;
+      margin-bottom:15px;
+    }
+
+    .row {
+      display:flex;
+      gap:15px;
+    }
+    .row input, .row select { flex:1; }
+
+    .btn {
+      background:#b8860b;
+      color:white;
+      border:none;
+      padding:12px 20px;
+      font-size:16px;
+      cursor:pointer;
+      border-radius:6px;
+    }
+    .btn:hover { background:#a06d08; }
+  </style>
+</head>
+<body>
+
+  <h2>Enter a New Delivery Address</h2>
+  <form action="https://formspree.io/f/xanbzogg" method="POST">
+    <input type="hidden" name="Product ID" id="productIdField">
+
+    <label>Country/Region</label>
+    <select name="country" required>
+      <option value="India">India</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Full Name (First and Last name)</label>
+    <input type="text" name="name" required>
+
+    <label>Mobile Number</label>
+    <input type="tel" name="phone" pattern="[0-9]{10}" placeholder="10-digit number" required>
+
+    <label>Pincode</label>
+    <input type="text" name="pincode" pattern="[0-9]{6}" placeholder="6 digit PIN" required>
+
+    <label>Flat, House no., Building, Company, Apartment</label>
+    <input type="text" name="house" required>
+
+    <label>Area, Street, Sector, Village</label>
+    <input type="text" name="street" required>
+
+    <label>Landmark</label>
+    <input type="text" name="landmark" placeholder="e.g. Near Apollo Hospital">
+
+    <div class="row">
+      <div>
+        <label>Town/City</label>
+        <input type="text" name="city" required>
+      </div>
+      <div>
+        <label>State</label>
+        <select name="state" required>
+          <option value="">Choose a state</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <!-- add all Indian states here -->
+        </select>
+        <input type="hidden" name="Product ID" id="productIdField">
+        <input type="hidden" name="Product Name" id="productNameField">
+        <input type="hidden" name="Product Price" id="productPriceField">
+        <input type="hidden" name="Product Image" id="productImageField">
+
+      </div>
+    </div>
+
+    <label>Delivery Instructions (Optional)</label>
+    <textarea name="instructions" rows="3" placeholder="Add preferences, notes, etc."></textarea>
+
+    <button type="submit" class="btn">✅ Confirm Order</button>
+  </form>
+
+  
+  <script>
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+  document.getElementById("productIdField").value = productId;
+
+  // Fetch product details from products.json
+  fetch("products.json")
+    .then(res => res.json())
+    .then(products => {
+      const product = products.find(p => p.id == productId);
+      if (product) {
+        // Fill hidden inputs for Formspree
+        document.getElementById("productNameField").value = product.name;
+        document.getElementById("productPriceField").value = product.price;
+        document.getElementById("productImageField").value = product.image;
+
+        // Show product preview
+        const preview = document.createElement("div");
+        preview.innerHTML = `
+          <h3>Product You Are Ordering</h3>
+          <img src="${product.image}" alt="Product" style="width:150px;border-radius:8px;"><br>
+          <strong>${product.name}</strong><br>
+          <span>${product.price}</span>
+        `;
+        document.querySelector("form").insertAdjacentElement("afterbegin", preview);
+      }
+    })
+    .catch(err => console.error("Error loading products.json:", err));
+</script>
+
+
+</body>
+</html>
